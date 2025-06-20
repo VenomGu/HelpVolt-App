@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <title>Formulário de Requisição</title>
+  <style>
+    /* Estilos CSS BÁSICOS (aplicados em todas as telas, a menos que sobrepostos por media query) */
+    body { 
+      font-family: Arial, sans-serif; 
+      margin: 20px; 
+      background-color: #f8f8f8; 
+    }
+    .container { 
+      max-width: 600px; /* Largura máxima para telas maiores que 500px */
+      margin: auto; 
+      padding: 20px; 
+      border: 1px solid #ddd; 
+      border-radius: 8px; 
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+      background-color: #fff; 
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    label { 
+      display: block; 
+      margin-bottom: 5px; 
+      font-weight: bold; 
+      color: #333;
+    }
+    input[type="text"], 
+    input[type="email"], 
+    textarea {
+      width: calc(100% - 22px); 
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box; 
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%; 
+      box-sizing: border-box;
+    }
+    button:hover { 
+      background-color: #45a049; 
+    }
+    .message { 
+      margin-top: 15px; 
+      padding: 10px; 
+      border-radius: 4px; 
+      text-align: center;
+    }
+    .success { 
+      background-color: #d4edda; 
+      color: #155724; 
+      border-color: #c3e6cb; 
+    }
+    .error { 
+      background-color: #f8d7da; 
+      color: #721c24; 
+      border-color: #f5c6cb; 
+    }
+    footer { 
+      text-align: center; 
+      margin-top: 30px; 
+      padding: 15px; 
+      background-color: #f2f2f2; 
+      border-top: 1px solid #ddd; 
+      font-size: 0.9em; 
+      color: #555;
+      border-radius: 0 0 8px 8px; 
+    }
+
+    /* ************************************************* */
+    /* NOVOS ESTILOS PARA TELAS MENORES (MEDIA QUERY)  Clasp teste*/
+    /* ************************************************* */
+    @media (max-width: 500px) {
+      body {
+        margin: 10px; /* Reduz margem lateral no celular */
+      }
+      .container {
+        padding: 15px; /* Reduz o padding interno do container no celular */
+        border-radius: 0; /* Remove bordas arredondadas para ocupar toda a largura */
+        box-shadow: none; /* Remove sombra para um visual mais "limpo" no celular */
+        max-width: 100%; /* Garante que o container se ajuste à largura total disponível */
+      }
+      input[type="text"], 
+      input[type="email"], 
+      textarea,
+      button {
+        font-size: 1em; /* Garante tamanho de fonte padrão ou ajustado se já tinha menor */
+        padding: 12px; /* Aumenta um pouco o padding dos inputs/botões para toque */
+      }
+      h2 {
+        font-size: 1.5em; /* Ajusta o tamanho do título */
+      }
+      label {
+        font-size: 0.95em; /* Ajusta o tamanho da label */
+      }
+      footer {
+        margin-top: 20px;
+        font-size: 0.8em;
+        padding: 10px;
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Nova Requisição</h2>
+    <div id="responseMessage" class="message" style="display:none;"></div>
+
+    <form id="requisicaoForm">
+      <label for="emailRequerente">Seu E-mail:</label>
+      <input type="email" id="emailRequerente" name="emailRequerente" required>
+
+      <label for="localRequisicao">Departamento/Área:</label>
+      <input type="text" id="localRequisicao" name="localRequisicao" required>
+
+      <label for="descricao">Descrição da Requisição:</label>
+      <textarea id="descricao" name="descricao" rows="5" required></textarea>
+
+      <button type="submit">Enviar Requisição</button>
+    </form>
+  </div>
+
+  <footer>
+    <p>Desenvolvido por Gustavo Calastro</p>
+    <p>Todos os direitos reservados &copy; 2025</p>
+  </footer>
+
+  <script>
+    document.getElementById('requisicaoForm').addEventListener('submit', function(e) {
+      e.preventDefault(); 
+
+      const emailRequerente = document.getElementById('emailRequerente').value;
+      const localRequisicao = document.getElementById('localRequisicao').value;
+      const descricao = document.getElementById('descricao').value;
+
+      const responseMessage = document.getElementById('responseMessage');
+      responseMessage.style.display = 'none'; 
+      responseMessage.className = 'message'; 
+
+      google.script.run
+        .withSuccessHandler(function(result) {
+          responseMessage.style.display = 'block';
+          if (result.success) {
+            responseMessage.classList.add('success');
+            responseMessage.textContent = result.message;
+            document.getElementById('requisicaoForm').reset(); 
+          } else {
+            responseMessage.classList.add('error');
+            responseMessage.textContent = 'Erro: ' + result.message;
+          }
+        })
+        .withFailureHandler(function(error) {
+          responseMessage.style.display = 'block';
+          responseMessage.classList.add('error');
+          responseMessage.textContent = 'Erro ao enviar requisição: ' + error.message;
+        })
+        .processarRequisicaoWeb(emailRequerente, localRequisicao, descricao);
+    });
+  </script>
+
+</body>
+</html>
