@@ -3,15 +3,21 @@
 <head>
   <base target="_top">
   <title>Formulário de Requisição</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" lang="pt-BR">
+  <meta name="description" content="Formulário para enviar requisições de serviços. Preencha seus dados e envie sua solicitação.">
+  <meta name="keywords" content="formulário, requisição, serviços, contato, email">
+  <meta name="author" content="Gustavo Calastro">
+  <link rel="icon" type="image/jpeg" href="https://drive.google.com/uc?export=view&id=1D2enQETlT5QbFyckDd889DNFhN-XaWa3">
+
   <style>
-    /* Estilos CSS BÁSICOS (aplicados em todas as telas, a menos que sobrepostos por media query) */
     body { 
       font-family: Arial, sans-serif; 
       margin: 20px; 
       background-color: #f8f8f8; 
     }
     .container { 
-      max-width: 600px; /* Largura máxima para telas maiores que 500px */
+      max-width: 600px; 
       margin: auto; 
       padding: 20px; 
       border: 1px solid #ddd; 
@@ -41,7 +47,7 @@
       box-sizing: border-box; 
     }
     button {
-      background-color: #4CAF50;
+      background-color: #2d24aa;
       color: white;
       padding: 12px 20px;
       border: none;
@@ -52,7 +58,7 @@
       box-sizing: border-box;
     }
     button:hover { 
-      background-color: #45a049; 
+      background-color: #3e36b1; 
     }
     .message { 
       margin-top: 15px; 
@@ -73,7 +79,7 @@
     footer { 
       text-align: center; 
       margin-top: 30px; 
-      padding: 15px; 
+      padding: 5px; 
       background-color: #f2f2f2; 
       border-top: 1px solid #ddd; 
       font-size: 0.9em; 
@@ -81,36 +87,33 @@
       border-radius: 0 0 8px 8px; 
     }
 
-    /* ************************************************* */
-    /* NOVOS ESTILOS PARA TELAS MENORES (MEDIA QUERY)  Clasp teste*/
-    /* ************************************************* */
     @media (max-width: 500px) {
       body {
-        margin: 10px; /* Reduz margem lateral no celular */
+        margin: 10px; 
       }
       .container {
-        padding: 15px; /* Reduz o padding interno do container no celular */
-        border-radius: 0; /* Remove bordas arredondadas para ocupar toda a largura */
-        box-shadow: none; /* Remove sombra para um visual mais "limpo" no celular */
-        max-width: 100%; /* Garante que o container se ajuste à largura total disponível */
+        padding: 15px; 
+        border-radius: 0; 
+        box-shadow: none; 
+        max-width: 100%; 
       }
       input[type="text"], 
       input[type="email"], 
       textarea,
       button {
-        font-size: 1em; /* Garante tamanho de fonte padrão ou ajustado se já tinha menor */
-        padding: 12px; /* Aumenta um pouco o padding dos inputs/botões para toque */
+        font-size: 1em; 
+        padding: 12px; 
       }
       h2 {
-        font-size: 1.5em; /* Ajusta o tamanho do título */
+        font-size: 1.5em; 
       }
       label {
-        font-size: 0.95em; /* Ajusta o tamanho da label */
+        font-size: 0.95em; 
       }
       footer {
         margin-top: 20px;
         font-size: 0.8em;
-        padding: 10px;
+        padding: 0px;
         border-radius: 0;
       }
     }
@@ -160,6 +163,7 @@
             responseMessage.classList.add('success');
             responseMessage.textContent = result.message;
             document.getElementById('requisicaoForm').reset(); 
+
           } else {
             responseMessage.classList.add('error');
             responseMessage.textContent = 'Erro: ' + result.message;

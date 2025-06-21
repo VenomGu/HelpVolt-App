@@ -6,13 +6,11 @@ function obterPlanilhaPeloNome(nome) {
 function novaRequisicao() {
   let requisicao = obterPlanilhaPeloNome("NovaRequisicao");
 
-  // Pega valores das posições referidas da planilha "NovaRequisicao"
-  let descricao = requisicao.getRange(4, 4).getValue(); // Coluna D4 (Descrição)
-  let emailRequerente = requisicao.getRange(4, 6).getValue(); // Email coluna F4
-  let localRequisicao = requisicao.getRange(4, 5).getValue(); // Local coluna E4
-  let statusTexto = "Pendente"; // Status inicial sempre Pendente
+  let descricao = requisicao.getRange(4, 4).getValue(); 
+  let emailRequerente = requisicao.getRange(4, 6).getValue(); 
+  let localRequisicao = requisicao.getRange(4, 5).getValue(); 
+  let statusTexto = "Pendente"; 
 
-  // Validação básica: E-mail, Descrição e Local são obrigatórios
   if (!emailRequerente || !descricao || !localRequisicao) {
     SpreadsheetApp.getUi().alert(
       "Por favor, preencha o E-mail do Requerente, a Descrição e o Local antes de enviar."
@@ -20,14 +18,12 @@ function novaRequisicao() {
     return;
   }
 
-  // Geração automática da Data Atual (com hora para maior precisão)
   let dataAtual = Utilities.formatDate(
     new Date(),
-    SpreadsheetApp.getActiveSpreadsheets().getSpreadsheetTimeZone(), // Correção: getActiveSpreadsheet()
+    SpreadsheetApp.getActiveSpreadsheets().getSpreadsheetTimeZone(), 
     "dd/MM/yyyy HH:mm:ss"
   );
 
-  // Lógica para gerar o número da Requisição automaticamente
   let requisicaoAberta = obterPlanilhaPeloNome("RequisicoesAbertas");
   let lastRow = requisicaoAberta.getLastRow();
   let novoNumeroDaReq;
@@ -38,28 +34,26 @@ function novaRequisicao() {
     let ultimoNumStr = requisicaoAberta.getRange(lastRow, 2).getValue().toString();
     let ultimoNumeroSequencial = 0;
 
-    if (ultimoNumStr.includes("REQ-")) { // Melhorado para inclusão
+    if (ultimoNumStr.includes("REQ-")) { 
       const partes = ultimoNumStr.split('REQ-');
       if (partes.length > 1) {
           const numStr = partes[1].trim(); 
           ultimoNumeroSequencial = parseInt(numStr);
       }
     }
-    if (isNaN(ultimoNumeroSequencial)) { // Garantia de número válido
+    if (isNaN(ultimoNumeroSequencial)) { 
         ultimoNumeroSequencial = 0;
     }
     novoNumeroDaReq = " REQ- " + Utilities.formatString("%04d", ultimoNumeroSequencial + 1);
   }
 
   let rowToInsert = lastRow + 1;
-  // Adiciona requisição na planilha "RequisicoesAbertas"
   requisicaoAberta.getRange(rowToInsert, 2, 1, 6).setValues([
     [novoNumeroDaReq, dataAtual, descricao, localRequisicao, emailRequerente, statusTexto],
   ]);
 
   requisicao.getRange("D4:G4").clearContent();
 
-  // --- Enviar E-mail de Confirmação para o requerente E com cópia para você ---
   let emailErrorMessage = ''; 
   try {
     enviarEmailConfirmacao(
@@ -79,14 +73,12 @@ function novaRequisicao() {
     Logger.log("Erro ao enviar e-mail na novaRequisicao: " + e.message);
   }
 
-  // Alerta para o usuário da planilha
   SpreadsheetApp.getUi().alert(
     "Sua requisição foi realizada com sucesso! Número da Requisição: " +
       novoNumeroDaReq + " Esta requisição foi enviada para o e-mail: " + emailRequerente + emailErrorMessage
   );
 }
 
-// --- Funções Auxiliares para E-mails ---
 
 function enviarEmailConfirmacao(emailDestinatario, emailCC, numero, descricao, local, data) {
   let assuntoDescricao = descricao.length > 50 ? descricao.substring(0, 50) + "..." : descricao;
@@ -167,7 +159,6 @@ function onEdit(e) {
   }
 }
 
-// --- FUNÇÃO PARA SERVIR O APLICATIVO WEB ---
 
 function doGet() {
   return HtmlService.createTemplateFromFile('Index')
@@ -175,7 +166,6 @@ function doGet() {
     .setTitle('Formulário de Requisição');
 }
 
-// --- FUNÇÃO CHAMADA PELO FORMULÁRIO WEB PARA PROCESSAR A REQUISIÇÃO ---
 
 function processarRequisicaoWeb(emailRequerente, localRequisicao, descricao) {
   Logger.log("Requisição recebida do Web App:");
@@ -183,13 +173,9 @@ function processarRequisicaoWeb(emailRequerente, localRequisicao, descricao) {
   Logger.log("Local: " + localRequisicao);
   Logger.log("Descricao: " + descricao);
 
-  // Aqui usamos obterPlanilhaPeloNome, que internamente usa getActiveSpreadsheet()
-  // Isso funciona se o seu script estiver ligado diretamente à planilha.
   let requisicaoAberta = obterPlanilhaPeloNome("RequisicoesAbertas");
-  // Opcional: Se 'Configurações' for usada por processarRequisicaoWeb, adicione a verificação:
-  // let configSheet = obterPlanilhaPeloNome("Configurações"); 
 
-  if (!requisicaoAberta) { // || !configSheet se você a usar
+  if (!requisicaoAberta) { 
     Logger.log("Erro: Planilha 'RequisicoesAbertas' (ou 'Configurações') não encontrada.");
     return { success: false, message: 'Erro interno: Verifique a configuração da planilha.' };
   }
@@ -224,8 +210,7 @@ function processarRequisicaoWeb(emailRequerente, localRequisicao, descricao) {
     SpreadsheetApp.getActiveSpreadsheet().getSpreadsheetTimeZone(),
     "dd/MM/yyyy HH:mm:ss"
   );
-  // Se 'Configurações' for usada para 'statusTexto' em processarRequisicaoWeb
-  // let statusTexto = configSheet.getRange('B1').getValue(); 
+
   let statusTexto = "Pendente"; 
 
   let rowToInsert = lastRow + 1;
