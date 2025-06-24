@@ -3,144 +3,396 @@
 <head>
   <base target="_top">
   <title>Formulário de Requisição</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" lang="pt-BR">
+  <meta name="description" content="Formulário para enviar requisições de serviços. Preencha seus dados e envie sua solicitação.">
+  <meta name="keywords" content="formulário, requisição, serviços, contato, email">
+  <meta name="author" content="Gustavo Calastro">
+  <link rel="icon" type="image/jpeg" href="https://drive.google.com/uc?export=view&id=1D2enQETlT5QbFyckDd889DNFhN-XaWa3">
+
   <style>
-    /* Estilos CSS BÁSICOS (aplicados em todas as telas, a menos que sobrepostos por media query) */
-    body { 
-      font-family: Arial, sans-serif; 
-      margin: 20px; 
-      background-color: #f8f8f8; 
+    body {
+      font-family: 'Roboto', sans-serif;
+      font-weight: bold;
+      margin: 20px;
+      background-color: #f8f8f8;
     }
-    .container { 
-      max-width: 600px; /* Largura máxima para telas maiores que 500px */
-      margin: auto; 
-      padding: 20px; 
-      border: 1px solid #ddd; 
-      border-radius: 8px; 
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
-      background-color: #fff; 
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      background-color: #fff;
     }
     h2 {
       text-align: center;
       color: #333;
       margin-bottom: 20px;
     }
-    label { 
-      display: block; 
-      margin-bottom: 5px; 
-      font-weight: bold; 
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
       color: #333;
     }
-    input[type="text"], 
-    input[type="email"], 
+    input[type="text"],
+    input[type="email"],
     textarea {
-      width: calc(100% - 22px); 
+      width: calc(100% - 22px);
       padding: 10px;
       margin-bottom: 15px;
       border: 1px solid #ccc;
       border-radius: 4px;
-      box-sizing: border-box; 
+      box-sizing: border-box;
     }
     button {
-      background-color: #4CAF50;
+      background-color: #B7212E;
       color: white;
       padding: 12px 20px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
       font-size: 16px;
-      width: 100%; 
+      width: 100%;
       box-sizing: border-box;
     }
-    button:hover { 
-      background-color: #45a049; 
+    button:hover {
+      background-color: #b93641;
     }
-    .message { 
-      margin-top: 15px; 
-      padding: 10px; 
-      border-radius: 4px; 
+    .message {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 4px;
       text-align: center;
     }
-    .success { 
-      background-color: #d4edda; 
-      color: #155724; 
-      border-color: #c3e6cb; 
+    .success {
+      background-color: #d4edda;
+      color: #155724;
+      border-color: #c3e6cb;
     }
-    .error { 
-      background-color: #f8d7da; 
-      color: #721c24; 
-      border-color: #f5c6cb; 
+    .error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border-color: #f5c6cb;
     }
-    footer { 
-      text-align: center; 
-      margin-top: 30px; 
-      padding: 15px; 
-      background-color: #f2f2f2; 
-      border-top: 1px solid #ddd; 
-      font-size: 0.9em; 
-      color: #555;
-      border-radius: 0 0 8px 8px; 
+    footer {
+      display: flex;
+      text-align: center;
+      align-items: center;
+      margin-top: 30px;
+      padding: 5px;
+      background-color: #004854;
+      border-top: 1px solid #ddd;
+      color: white;
+      font-size: 0.9em;
+      border-radius: 8px 8px 0px 0px;
+    }
+    #footer-dev{
+      background-color: #005C6D;
+      padding: 5px;
+      color: white;
+      font-size: 16px;
+      border-radius: 0px 0px 8px 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+    #title-logo {
+        margin: 0;
+        font-size: 1.8em;
+      }
+      #header{
+        text-align: center;
+        padding: 20px;
+        background-color: #B7212E;
+        color: white;
+        border-radius: 8px;
+      }
+    #links-icons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-evenly;
+      background-color: #AAAAAA;
+      width: 60px;
+      height: 60px;
+      border-radius: 8%;
+    }
+    #links-icons:hover {
+      background-color: #c9c7c7fd;
+    }
+    #path-icons {
+      width: 21.88px;
+      height: 21.88px;
+      fill: white;
+    }
+    #social-media {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    #links {
+      grid-row: 3;
+      gap: 10px;
+      display: contents;
+    }
+    #svg-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 10%;
+    }
+    #endereco {
+      margin: 4px 0;
+      line-height: 1.2em;
+    }
+    #header-logo {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    #helpvolt-logo {
+      width: 80px;
+      height: auto;
+      margin: 8px; 
+      border-radius: 8px;
     }
 
-    /* ************************************************* */
-    /* NOVOS ESTILOS PARA TELAS MENORES (MEDIA QUERY)  Clasp teste*/
-    /* ************************************************* */
-    @media (max-width: 500px) {
+
+    @media (max-width: 768px) {
       body {
-        margin: 10px; /* Reduz margem lateral no celular */
+        margin: 10px;
       }
       .container {
-        padding: 15px; /* Reduz o padding interno do container no celular */
-        border-radius: 0; /* Remove bordas arredondadas para ocupar toda a largura */
-        box-shadow: none; /* Remove sombra para um visual mais "limpo" no celular */
-        max-width: 100%; /* Garante que o container se ajuste à largura total disponível */
+        padding: 15px;
+        border-radius: 0;
+        box-shadow: none;
+        max-width: 100%;
       }
-      input[type="text"], 
-      input[type="email"], 
+      input[type="text"],
+      input[type="email"],
       textarea,
       button {
-        font-size: 1em; /* Garante tamanho de fonte padrão ou ajustado se já tinha menor */
-        padding: 12px; /* Aumenta um pouco o padding dos inputs/botões para toque */
+        font-size: 1em;
+        padding: 12px;
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
       }
       h2 {
-        font-size: 1.5em; /* Ajusta o tamanho do título */
+        font-size: 1.5em;
       }
       label {
-        font-size: 0.95em; /* Ajusta o tamanho da label */
+        font-size: 0.95em;
       }
       footer {
         margin-top: 20px;
         font-size: 0.8em;
-        padding: 10px;
+        padding: 16px;
         border-radius: 0;
+        /* Para mobile, o footer pode precisar ser em coluna */
+        flex-direction: column; 
+        align-items: center; 
+      }
+      #footer-dev {
+          /* Ajustes para o rodapé em telas menores */
+          font-size: 0.8em;
+          flex-direction: column; /* Organiza o conteúdo em coluna */
+          align-items: center; /* Alinha os itens à esquerda */
+          padding: 10px 15px; /* Mais padding para melhor visualização */
+          text-align: left; /* Garante o texto alinhado à esquerda */
+      }
+      #title-logo {
+        font-size: 1.4em; /* Reduz o tamanho do título do logo para caber melhor */
+      }
+      #header{
+        /* Header já está bom com padding e alinhamento */
+        border-radius: 0; /* Remove o border-radius para ocupar a largura total */
+      }
+      #header-logo {
+        /* Garante que o logo e título se ajustem bem */
+        flex-direction: row; /* Empilha logo e título */
+        align-items: center; /* Centraliza-os */
+        gap: 10px; /* Adiciona um pequeno espaço entre eles */
+      }
+      #links-icons {
+        width: 50px; /* Reduz o tamanho dos botões de ícone */
+        height: 50px;
+        /* Mantém o display flex para os ícones dentro do social-media */
+      }
+      #svg-icon {
+        width: 25px; /* Reduz o tamanho do SVG do ícone */
+        height: 25px;
+      }
+      #social-media {
+        /* Se precisar de mais espaço ou ajuste nos ícones */
+        justify-content: space-around; /* Distribui os ícones horizontalmente */
+        margin-top: 15px; /* Um pouco mais de margem superior */
+        flex-wrap: wrap; /* Permite que os ícones quebrem linha se houver muitos */
+      }
+      #endereco {
+        font-size: 0.85em; /* Reduz o tamanho da fonte do endereço */
+        text-align: center; /* Centraliza o endereço */
+        margin: 5px 0;
+      }
+      /* Ajuste para os parágrafos dentro de #footer-dev se necessário */
+      #footer-dev p {
+          margin: 5px 0; /* Espaçamento entre os parágrafos */
+      }
+      #footer-dev a {
+          margin: 5px 0; /* Espaçamento para o link */
+      }
+      #helpvolt-logo {
+      width: 60px;
+      height: auto;
+      margin: 8px;
+      border-radius: 8px;
       }
     }
-  </style>
+
+</style>
 </head>
 <body>
 
+  <header id="header">
+    <div id="header-logo">
+    <img src="https://fateccampinas.edu.br/site/wp-content/uploads/2024/03/logoFatec125.png" alt="Title">
+    <img id="helpvolt-logo" src="\Imagens\helpvolt-Logo.jpg" alt="HelpVolt-Logo">
+    <div id="social-media">
+      <div id="links">
+        <p id="links-icons">
+        <a href="https://www.facebook.com/fateccps/?locale=pt_BR" target="_blank">
+          <svg id="svg-icon" class="e-font-icon-svg e-fab-facebook-f" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"> 
+            <path id="path-icons" d="M279.14 288l14.22-92.66h-88.91V144c0-25.19 12.34-49.56 52.44-49.56h40.59V6.26S272.43 0 240.29 0C148.77 0 96 54.2 96 153.69v42.35H7v92.66h89V512h110.91V288z"/>
+          </svg>
+        </a>
+        <p id="links-icons" >
+        <a href="https://www.instagram.com/fateccampinas/" target="_blank">
+          <svg id="svg-icon" class="e-font-icon-svg e-fab-instagram" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"> 
+            <path id="path-icons" d="M224.1 141c-63.6 0-115.1 51.5-115.1 115.1S160.5 371.2 224.1 371.2s115.1-51.5 115.1-115.1S287.7 141 224.1 141zm0 190c-41.2 0-75-33.8-75-75s33.8-75 75-75 75 33.8 75 75-33.8 75-75 75zm146.4-194c0 14.9-12.1 27-27 27s-27-12.1-27-27c0-14.9 12.1-27 27-27s27 12.1 27 27zM398.6 32H49.4C22.1 32 .2 54 .2 81v350c0 26.3 21.9 49 49.2 49h349c26.3 0 49-22.7 49-49V81c0-26.3-22.7-49-49-49zM224.1 384c-88.4 0-160-71.6-160-160S135.76464,64,224,64s160,71,160,160S312,384,224,384z"/>
+          </svg>
+        </a>
+        </p>
+  
+        <p id="links-icons" >
+        <a href="https://br.linkedin.com/school/fatec-campinas---faculdade-de-tecnologia-de-campinas/" target="_blank">
+          <svg id="svg-icon" class="e-font-icon-svg e-fab-linkedin" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"> 
+            <path id="path-icons" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/>
+          </svg>
+        </a>
+      </p>
+        <p id="links-icons" >
+        <a href="https://www.youtube.com/channel/UCDbVwWuKNcvh5TPPF0lA2oQ" target="_blank">
+          <svg id="svg-icon" class="e-font-icon-svg e-fab-youtube" viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"> 
+            <path id="path-icons" d="M549.655 124.083c-6.25-23.438-24.688-41.875-48.125-48.125C458.75 64 288 64 288 64S117.25 64 74.469 75.958c-23.438 6.25-41.875 24.688-48.125 48.125C16 166.875 16 256 16 256s0 89.125 10.344 131.917c6.25 23.438 24.688 41.875 48.125 48.125C117.25 448 288 448 288 448s170.75 0 213.531-11.958c23.438-6.25 41.875-24.688 48.125-48.125C560 345.125 560 256 560 256s0-89.125-10.345-131.917zM232 352V160l144 96-144 96z"/>
+          </svg>
+        </a>
+        </p>
+        <p id="links-icons" >
+          <a href="http://www.fatec.sp.gov.br/view/Default.aspx" target="_blank">
+            <svg id="svg-icon" class="e-font-icon-svg e-fab-windows" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"> 
+              <path id="path-icons" d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z"/>
+            </svg>
+          </a>
+          </p>
+        </div>
+      </div>
+        </p>
+      </div>
+    </div>
+    <div id="under-title">
+      <p>Formulário de Requisição de Serviços</p>
+      <p>Preencha os campos abaixo para enviar sua requisição.</p>
+    </div>
+  </header> 
+
   <div class="container">
-    <h2>Nova Requisição</h2>
     <div id="responseMessage" class="message" style="display:none;"></div>
 
     <form id="requisicaoForm">
       <label for="emailRequerente">Seu E-mail:</label>
-      <input type="email" id="emailRequerente" name="emailRequerente" required>
+      <input type="email" id="emailRequerente" name="emailRequerente" placeholder="Seu E-mail" required>
 
       <label for="localRequisicao">Departamento/Área:</label>
-      <input type="text" id="localRequisicao" name="localRequisicao" required>
+      <input type="text" id="localRequisicao" name="localRequisicao" placeholder="Local de reparo" required>
 
       <label for="descricao">Descrição da Requisição:</label>
-      <textarea id="descricao" name="descricao" rows="5" required></textarea>
+      <textarea id="descricao" name="descricao" rows="5" placeholder="Descreva o problema" required></textarea>
 
       <button type="submit">Enviar Requisição</button>
     </form>
   </div>
 
-  <footer>
-    <p>Desenvolvido por Gustavo Calastro</p>
-    <p>Todos os direitos reservados &copy; 2025</p>
-  </footer>
+  <footer id="footer">
+    <div id = "cps-logos">
+    <img src="https://fateccampinas.edu.br/site/wp-content/uploads/2024/03/cps_151.png" alt="CPS-logo">
+    <img src="https://fateccampinas.edu.br/site/wp-content/uploads/2024/03/logo-governo-do-estado-sp.png" alt="sub-CPS-logo">
+  </div>
+    <p id = "endereco">
+      <strong>Endereço: <br/></strong>
+      Av. Cônego Antonio Rocatto, 593<br/>
+      Jardim Santa Mônica<br/>
+      CEP 13.082-015<br/>
+      Campinas – SP<br/>
+      <strong>Telefone:<br/> </strong>(19) 3216-6474
+      <strong>E-mail:<br/></strong>f276acad@cps.sp.gov.br
+    </p>
+    <div id="social-media">
+    <div id="links">
+      <p id="links-icons">
+      <a href="https://www.facebook.com/fateccps/?locale=pt_BR" target="_blank">
+        <svg id="svg-icon" class="e-font-icon-svg e-fab-facebook-f" viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"> 
+          <path id="path-icons" d="M279.14 288l14.22-92.66h-88.91V144c0-25.19 12.34-49.56 52.44-49.56h40.59V6.26S272.43 0 240.29 0C148.77 0 96 54.2 96 153.69v42.35H7v92.66h89V512h110.91V288z"/>
+        </svg>
+      </a>
+      <p id="links-icons" >
+      <a href="https://www.instagram.com/fateccampinas/" target="_blank">
+        <svg id="svg-icon" class="e-font-icon-svg e-fab-instagram" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"> 
+          <path id="path-icons" d="M224.1 141c-63.6 0-115.1 51.5-115.1 115.1S160.5 371.2 224.1 371.2s115.1-51.5 115.1-115.1S287.7 141 224.1 141zm0 190c-41.2 0-75-33.8-75-75s33.8-75 75-75 75 33.8 75 75-33.8 75-75 75zm146.4-194c0 14.9-12.1 27-27 27s-27-12.1-27-27c0-14.9 12.1-27 27-27s27 12.1 27 27zM398.6 32H49.4C22.1 32 .2 54 .2 81v350c0 26.3 21.9 49 49.2 49h349c26.3 0 49-22.7 49-49V81c0-26.3-22.7-49-49-49zM224.1 384c-88.4 0-160-71.6-160-160S135.76464,64,224,64s160,71,160,160S312,384,224,384z"/>
+        </svg>
+      </a>
+      </p>
 
+      <p id="links-icons" >
+      <a href="https://br.linkedin.com/school/fatec-campinas---faculdade-de-tecnologia-de-campinas/" target="_blank">
+        <svg id="svg-icon" class="e-font-icon-svg e-fab-linkedin" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"> 
+          <path id="path-icons" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/>
+        </svg>
+      </a>
+    </p>
+      <p id="links-icons" >
+      <a href="https://www.youtube.com/channel/UCDbVwWuKNcvh5TPPF0lA2oQ" target="_blank">
+        <svg id="svg-icon" class="e-font-icon-svg e-fab-youtube" viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"> 
+          <path id="path-icons" d="M549.655 124.083c-6.25-23.438-24.688-41.875-48.125-48.125C458.75 64 288 64 288 64S117.25 64 74.469 75.958c-23.438 6.25-41.875 24.688-48.125 48.125C16 166.875 16 256 16 256s0 89.125 10.344 131.917c6.25 23.438 24.688 41.875 48.125 48.125C117.25 448 288 448 288 448s170.75 0 213.531-11.958c23.438-6.25 41.875-24.688 48.125-48.125C560 345.125 560 256 560 256s0-89.125-10.345-131.917zM232 352V160l144 96-144 96z"/>
+        </svg>
+      </a>
+      </p>
+      <p id="links-icons" >
+        <a href="http://www.fatec.sp.gov.br/view/Default.aspx" target="_blank">
+          <svg id="svg-icon" class="e-font-icon-svg e-fab-windows" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"> 
+            <path id="path-icons" d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z"/>
+          </svg>
+        </a>
+        </p>
+
+    </div>
+      </p>
+    </div>
+
+    <div id="selo">
+    <img src="https://fateccampinas.edu.br/site/wp-content/uploads/elementor/thumbs/selo-1-qkquqtpxfon7qth8mw4payz2rojxsaro8nncj31q6o.png" alt="selo">
+    </div>
+
+  </footer>
+  <div id="footer-dev">
+    Desenvolvido por Gustavo Calastro -&nbsp;
+  <a href="https://wa.me/5521992824028" target="_blank"> Contato: (19) 99282-4028 - &nbsp; </a> <p> e-mail: gu.calastro@gmail.com &nbsp;</p>
+  <p> Todos os direitos reservados &copy; 2025</p>
+  </div>
   <script>
     document.getElementById('requisicaoForm').addEventListener('submit', function(e) {
       e.preventDefault(); 
@@ -160,6 +412,7 @@
             responseMessage.classList.add('success');
             responseMessage.textContent = result.message;
             document.getElementById('requisicaoForm').reset(); 
+
           } else {
             responseMessage.classList.add('error');
             responseMessage.textContent = 'Erro: ' + result.message;
