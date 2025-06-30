@@ -240,7 +240,7 @@ function processarRequisicaoWeb(emailRequerente, localRequisicao, descricao) {
     Logger.log("Erro ao enviar e-mail para requisição " + novoNumeroDaReq + ": " + e.message);
   }
 
-  return { success: true, message: 'Requisição nº ' + novoNumeroDaReq + ' enviada com sucesso!' + emailErrorMessage + "A resposta do técnico será enviada para o e-mail: " + emailRequerente + "." };
+  return { success: true, message: 'Requisição nº ' + novoNumeroDaReq + ' enviada com sucesso! ' + emailErrorMessage + "A resposta do técnico será enviada para o e-mail: " + emailRequerente + "." };
 }
 
 function abrirFormularioWeb() {

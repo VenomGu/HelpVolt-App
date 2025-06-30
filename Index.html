@@ -54,14 +54,13 @@
         input[type="email"],
         textarea {
             width: 100%;
-            padding: 5vh; 
-            margin-bottom: 5vh; 
+            padding: 2vh; 
+            margin-bottom: 2vh; 
             border: 1px solid #ccc;
             border-radius: 8px;
             box-sizing: border-box;
             font-size: xx-large; 
             font-family: 'Roboto', sans-serif;
-            font-weight: bold;
         }
         textarea {
             resize: vertical;
@@ -70,7 +69,7 @@
         button {
             background-color: #B7212E;
             color: white;
-            padding: 5vh 7vw; 
+            padding: 2vh; 
             border: none;
             border-radius: 8px;
             cursor: pointer;
@@ -78,7 +77,7 @@
             width: 100%;
             box-sizing: border-box;
             transition: background-color 0.3s ease;
-            margin-top: 4vh; 
+            margin-top: 1vh; 
         }
         button:hover {
             background-color: #b93641;
@@ -105,12 +104,11 @@
             text-align: center;
             align-items: center;
             margin-top: auto;
-            padding: 4vh;
             background-color: #004854;
             border-top: 1px solid #ddd;
             color: white;
             font-size: xx-large; 
-            border-radius: 0;
+            border-radius: 8px 8px 0 0;
             flex-direction: row;
             box-sizing: border-box;
             flex-shrink: 0;
@@ -118,10 +116,10 @@
         }
         #footer-dev{
             background-color: #005C6D;
-            padding: 3.5vh 3vw;
+            padding: 2px 4px;
             color: white;
             font-size: medium; 
-            border-radius: 0;
+            border-radius: 0 0 8px 8px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -135,12 +133,11 @@
             font-size: xx-large; 
         }
         #header{
+            padding: 8px 2px;
             text-align: center;
-            padding: 4vh 0;
             background-color: #B7212E;
             color: white;
-            border-radius: 0;
-            margin-bottom: 4vh; 
+            border-radius: 0 0 8px 8px;
             box-sizing: border-box;
             flex-shrink: 0;
         }
@@ -208,7 +205,7 @@
             border-radius: 10%;
         }
         #endereco {
-            font-size: small; 
+            font-size: medium; 
             text-align: center;
             margin: 0vh 2vw; 
             line-height: 2.2em;
@@ -337,38 +334,49 @@
       <a href="https://venomgu.github.io/meu-curriculo/index.html" target="_blank"><i>Gustavo Calastro</i></a>
       <p>Todos os direitos reservados © 2025</p>
   </div>
-    <script>
-        document.getElementById('requisicaoForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+  <script>
+    document.getElementById('requisicaoForm').addEventListener('submit', function(e) {
+        e.preventDefault();
 
-            const emailRequerente = document.getElementById('emailRequerente').value;
-            const localRequisicao = document.getElementById('localRequisicao').value;
-            const descricao = document.getElementById('descricao').value;
+        const emailRequerente = document.getElementById('emailRequerente').value;
+        const localRequisicao = document.getElementById('localRequisicao').value;
+        const descricao = document.getElementById('descricao').value;
 
-            const responseMessage = document.getElementById('responseMessage');
-            responseMessage.style.display = 'none';
-            responseMessage.className = 'message';
+        const responseMessage = document.getElementById('responseMessage');
+        const submitButton = document.querySelector('button[type="submit"]');
 
-            google.script.run
-                .withSuccessHandler(function(result) {
-                    responseMessage.style.display = 'block';
-                    if (result.success) {
-                        responseMessage.classList.add('success');
-                        responseMessage.textContent = result.message;
-                        document.getElementById('requisicaoForm').reset();
+        responseMessage.style.display = 'none';
+        responseMessage.className = 'message';
 
-                    } else {
-                        responseMessage.classList.add('error');
-                        responseMessage.textContent = 'Erro: ' + result.message;
-                    }
-                })
-                .withFailureHandler(function(error) {
-                    responseMessage.style.display = 'block';
+        submitButton.disabled = true;
+        submitButton.textContent = 'Enviando...';
+        submitButton.style.backgroundColor = '#999';
+
+        google.script.run
+            .withSuccessHandler(function(result) {
+                responseMessage.style.display = 'block';
+                if (result.success) {
+                    responseMessage.classList.add('success');
+                    responseMessage.textContent = result.message;
+                    document.getElementById('requisicaoForm').reset();
+                } else {
                     responseMessage.classList.add('error');
-                    responseMessage.textContent = 'Erro ao enviar requisição: ' + error.message;
-                })
-                .processarRequisicaoWeb(emailRequerente, localRequisicao, descricao);
-        });
-    </script>
+                    responseMessage.textContent = 'Erro: ' + result.message;
+                }
+                submitButton.disabled = false;
+                submitButton.textContent = 'Enviar Requisição';
+                submitButton.style.backgroundColor = '#B7212E';
+            })
+            .withFailureHandler(function(error) {
+                responseMessage.style.display = 'block';
+                responseMessage.classList.add('error');
+                responseMessage.textContent = 'Erro ao enviar requisição: ' + error.message;
+                submitButton.disabled = false;
+                submitButton.textContent = 'Enviar Requisição';
+                submitButton.style.backgroundColor = '#B7212E';
+            })
+            .processarRequisicaoWeb(emailRequerente, localRequisicao, descricao);
+    });
+</script>
 </body>
 </html>
